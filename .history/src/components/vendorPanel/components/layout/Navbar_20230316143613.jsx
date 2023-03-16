@@ -1,0 +1,42 @@
+/** @format */
+
+import { RiMenu4Line } from "react-icons/ri";
+import { Modal ,Form , Button } from 'react-bootstrap'
+
+const Navbar = ({ hamb, setHamb }) => {
+  const [modalShow, setModalShow] = React.useState(false);
+
+  
+  return (
+    <>
+     
+      <div
+        className={
+          hamb
+            ? "flex  w-full justify-between  my-1 rounded-sm  p-4 py-3 shadow-md items-center  bg-slate-200 space-x-4"
+            : "flex  w-full justify-between my-1 rounded-sm  p-4 py-3 shadow-md items-center  bg-slate-200 space-x-4"
+        }
+        style={{   backgroundColor: "#263544", color : "#fff"}}
+      >
+        <RiMenu4Line
+          onClick={() => setHamb(!hamb)}
+          className="text-2xl font-bold text-#fff-900 hover:scale-90 cursor-pointer"
+        />
+
+        <section className="flex sm:ml-auto justify-end sm:w-full items-center space-x-2  pr-2">
+          <figcaption className="tracking-wider pl-1 font-semibold">
+            <div className="lg:text-base text-sm text-#fff-900  uppercase" >
+              Welcome
+              <i class="fa-sharp fa-solid fa-gear" style={{marginLeft : '10px'}}></i>
+            </div>
+            
+          </figcaption>
+        </section>
+
+        
+      </div>
+    </>
+  );
+};
+
+export default Navbar;
