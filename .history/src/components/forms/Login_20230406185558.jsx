@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { VscEyeClosed, VscEye } from "react-icons/vsc";
 import { AiOutlinePhone } from "react-icons/ai";
+import { BiLogInCircle } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Oval } from "react-loader-spinner";
@@ -89,19 +90,20 @@ const Login = () => {
 
             <button
               type="submit"
-              className='btn1'
+              className="button2 "
             >
               {loading ? (
                 <Oval height={30} secondaryColor="black" color="black" />
               ) : (
-                "LOG IN"
+                <div className="flex items-center">
+                  LOG IN
+                </div>
               )}
             </button>
             <button
               type="button"
               onClick={() => navigate("/")}
-              className="btn2"
-
+              className="btn1"
             >
               Admin Panel
             </button>

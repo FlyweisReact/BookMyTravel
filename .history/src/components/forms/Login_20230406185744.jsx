@@ -15,6 +15,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [ ]
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -89,7 +90,7 @@ const Login = () => {
 
             <button
               type="submit"
-              className='btn1'
+              className="btn2"
             >
               {loading ? (
                 <Oval height={30} secondaryColor="black" color="black" />
@@ -100,8 +101,7 @@ const Login = () => {
             <button
               type="button"
               onClick={() => navigate("/")}
-              className="btn2"
-
+              className="btn1"
             >
               Admin Panel
             </button>

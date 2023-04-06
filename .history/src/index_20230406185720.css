@@ -59,31 +59,31 @@ code {
   padding: 5px;
 }
 
-.BannerImg {
+.BannerImg{
   display: grid;
   grid-template-columns: auto auto auto;
   margin: 20px;
   justify-content: space-evenly;
   text-align: center;
 }
-.BannerImg img {
+.BannerImg img{
   width: 400px;
 }
 
-.btn1 {
+.btn1{
   background-color: #4b86b4;
   color: #fff;
-  width: 100%;
+  width:100%;
   padding: 10px;
   font-size: 20px;
   border: 1px solid #4b86b4;
 }
-.btn2 {
+.btn2{
   background-color: #fff;
-  color: #4b86b4;
-  width: 100%;
+  color: #fff;
+  width:100%;
   padding: 10px;
   font-size: 20px;
-  border: 1px solid #4b86b4;
-  text-align: center;
+    border: 1px solid #4b86b4;
+    text-align: center;
 }

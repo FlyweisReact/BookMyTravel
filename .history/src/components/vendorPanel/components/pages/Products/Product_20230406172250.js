@@ -233,4 +233,4 @@ const Product = () => {
   );
 };
 
-  export default HOC(Product);
+export default HOC(Product);

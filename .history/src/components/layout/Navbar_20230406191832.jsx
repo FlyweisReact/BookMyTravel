@@ -10,8 +10,8 @@ import Form from "react-bootstrap/Form";
 function MyVerticallyCenteredModal(props) {
   const VendorId = localStorage.getItem("VendorId")
 
-  const [ name , setName  ] = useState("")
-  const [email , setEmail ] = useState("")
+  const [ ] = useState("")
+  const [ ] = useState("")
   const [ ] = useState("")
   const [ ] = useState("")
   const [ ] = useState("")

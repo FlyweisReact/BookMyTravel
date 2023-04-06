@@ -8,14 +8,6 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
 function MyVerticallyCenteredModal(props) {
-  const VendorId = localStorage.getItem("VendorId")
-
-  const [ name , setName  ] = useState("")
-  const [email , setEmail ] = useState("")
-  const [ ] = useState("")
-  const [ ] = useState("")
-  const [ ] = useState("")
-
   return (
     <Modal
       {...props}
@@ -92,7 +84,7 @@ const Navbar = ({ hamb, setHamb }) => {
         </section>
         <CgProfile
           onClick={() => setModalShow(true)}
-          className="text-2xl sm:text-3xl font-bold text-[#fff] cursor-pointer"
+          className="text-2xl sm:text-3xl font-bold text-[rgb(241,146,46)] cursor-pointer"
         />
       </div>
     </>

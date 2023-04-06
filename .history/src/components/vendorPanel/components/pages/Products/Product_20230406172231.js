@@ -149,8 +149,8 @@ const Product = () => {
           </span>
         </div>
 
-        <div style={{ maxWidth: "900px", overflow: "auto", margin: "auto" }}>
-          <Table striped bordered hover>
+        <div style={{ width : '100%', overflow: "auto", margin: "auto" }}>
+          <Table striped bordered hover style={{width : '100%' , overflowX : 'auto'}}>
             <thead>
               <tr>
                 <th> Video/Image </th>
@@ -233,4 +233,4 @@ const Product = () => {
   );
 };
 
-  export default HOC(Product);
+export default HOC(Product);

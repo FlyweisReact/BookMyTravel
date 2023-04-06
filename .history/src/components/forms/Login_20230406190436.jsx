@@ -89,7 +89,7 @@ const Login = () => {
 
             <button
               type="submit"
-              className='btn1'
+              className
             >
               {loading ? (
                 <Oval height={30} secondaryColor="black" color="black" />

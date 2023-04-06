@@ -11,7 +11,7 @@ function MyVerticallyCenteredModal(props) {
   const VendorId = localStorage.getItem("VendorId")
 
   const [ name , setName  ] = useState("")
-  const [email , setEmail ] = useState("")
+  const [email , set ] = useState("")
   const [ ] = useState("")
   const [ ] = useState("")
   const [ ] = useState("")
