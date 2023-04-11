@@ -55,7 +55,7 @@ const Login = () => {
           </p>
           <section className="py-7 space-y-6">
             {/* Email */}
-            <div className="sm:w-96 border border-[rgb(241,146,46)] space-x-4 flex items-center w-64  p-2 rounded-md">
+            <div className=" sm:w-96 border border-[rgb(241,146,46)] space-x-4 flex items-center w-64  p-2 rounded-md">
               <input
                 type="email"
                 placeholder="vendor@gmail.com"
