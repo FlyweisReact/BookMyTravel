@@ -138,7 +138,7 @@ const Discount = () => {
               <Form.Label>Vedio/Image</Form.Label>
               <Form.Control
                 type="file"
-                onChange={(e) => uploadImage(e)}
+                onChange={(e) => uploadImage(e.target.files[0])}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -592,6 +592,14 @@ const Discount = () => {
                         class="fa-sharp fa-solid fa-trash"
                         style={{ color: "red", cursor: "pointer" }}
                         onClick={() => deleteData(i._id)}
+                      ></i>
+                      <i
+                        class="fa-sharp fa-solid fa-edit"
+                        style={{ color: "blue", cursor: "pointer" }}
+                        onClick={() => {
+                          setId(i._id);
+                          setModalShow(true);
+                        }}
                       ></i>
                       <i
                         className="fa-solid fa-file-pen"

@@ -1,27 +1,20 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import HOC from "../../layout/HOC";
+import { Table, Modal, Form, Button } from "react-bootstrap";
 import axios from "axios";
+import HOC from "../../layout/HOC";
 import { toast } from "react-toastify";
-import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 
-const Discount = () => {
+const Product = () => {
   const [data, setData] = useState([]);
   const [modalShow, setModalShow] = useState(false);
-  const vendorId = localStorage.getItem("VendorId");
-  const [id, setId] = useState("");
-  const [edit, setEdit] = useState(false);
-  const [editModal, setEditModal] = useState(false);
+  const [ id , setId ] = useState("")
 
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        `https://oyi65hi3pd.execute-api.ap-south-1.amazonaws.com/development/packagesRouter/getpackagesByVendorIdByAdmin/${vendorId}`
+        "https://oyi65hi3pd.execute-api.ap-south-1.amazonaws.com/development/packagesRouter/getallpackagesByAdmin"
       );
       setData(data.data);
     } catch (err) {
@@ -51,226 +44,6 @@ const Discount = () => {
     const [end_date, setEndDate] = useState("");
     const [price, setPrice] = useState("");
     const [discount, setDiscount] = useState("");
-    const [Type, setType] = useState("");
-    const [packageName, setPackageName] = useState("");
-    const [otherActivity, setOtherActivity] = useState("");
-    const [Highlightsofpackage, setHighlightsOfPackage] = useState("");
-    const [day, setDay] = useState("");
-    const [itenary, setIternay] = useState("");
-    const [longitude, setLongitude] = useState("");
-    const [latitude, setLatitude] = useState("");
-    const [touristDestination, setDestination] = useState("");
-    const [location, setLocation] = useState("");
-    const [category, setCategory] = useState("");
-    const [images, setImage] = useState("");
-    const [inclusions, setInclusion] = useState("");
-
-    const uploadImage = (e) => {
-      const data = new FormData();
-      data.append("file", e.target.files[0]);
-      data.append("upload_preset", "ml_default");
-      data.append("cloud_name", "dbcnha741");
-      fetch("https://api.cloudinary.com/v1_1/dbcnha741/image/upload", {
-        method: "post",
-        body: data,
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setImage(data.url);
-          console.log(data);
-          console.log(data?.url);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    const postData = async (e) => {
-      e.preventDefault();
-      try {
-        const { data } = await axios.post(
-          "https://oyi65hi3pd.execute-api.ap-south-1.amazonaws.com/development/packagesRouter/packagesByVendor",
-          {
-            start_date,
-            end_date,
-            price,
-            discount,
-            Type,
-            packageName,
-            otherActivity,
-            Highlightsofpackage,
-            longitude,
-            latitude,
-            day,
-            itenary,
-            category,
-            images,
-            inclusions,
-            touristDestination,
-            location,
-            vendorId,
-          }
-        );
-        console.log(data);
-        props.onHide();
-        toast.success("Package Added");
-        fetchData();
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Add Package
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={postData}>
-            <Form.Group className="mb-3">
-              <Form.Label>Vedio/Image</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={(e) => uploadImage(e)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setPackageName(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setCategory(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Highlights</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setHighlightsOfPackage(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Itinerary day  </Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setDay(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Itinerary   </Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setIternay(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Inclusion</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setInclusion(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Latitude</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setLatitude(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Longitude</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setLongitude(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Start Date</Form.Label>
-              <Form.Control
-                type="date"
-                onChange={(e) => setStartDate(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>End Date</Form.Label>
-              <Form.Control
-                type="date"
-                onChange={(e) => setEndDate(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Price</Form.Label>
-              <Form.Control
-                type="number"
-                onChange={(e) => setPrice(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Discount</Form.Label>
-              <Form.Control
-                type="number"
-                min={1}
-                onChange={(e) => setDiscount(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Type</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setType(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Activity</Form.Label>
-              <FloatingLabel controlId="floatingTextarea" className="mb-3">
-                <Form.Control
-                  as="textarea"
-                  placeholder="Leave a comment here"
-                  onChange={(e) => setOtherActivity(e.target.value)}
-                />
-              </FloatingLabel>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Tourist Destination</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setDestination(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Location</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setLocation(e.target.value)}
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
-    );
-  }
-
-  function EditPackageModal(props) {
-    const [start_date, setStartDate] = useState("");
-    const [end_date, setEndDate] = useState("");
-    const [price, setPrice] = useState("");
-    const [discount, setDiscount] = useState("");
     const [DiscountedPrice, setDiscountedPrice] = useState("");
     const [Type, setType] = useState("");
     const [packageName, setPackageName] = useState("");
@@ -286,6 +59,7 @@ const Discount = () => {
     const [inclusions, setInclusions] = useState("");
     const [Highlightsofpackage, setHighlightsofPackage] = useState("");
 
+
     const uploadImage = (e) => {
       const data = new FormData();
       data.append("file", e.target.files[0]);
@@ -305,6 +79,7 @@ const Discount = () => {
           console.log(err);
         });
     };
+
 
     const putHandler = async (e) => {
       e.preventDefault();
@@ -330,7 +105,6 @@ const Discount = () => {
             category,
             images: image,
             Highlightsofpackage,
-            vendorId,
           }
         );
         console.log(data);
@@ -358,7 +132,10 @@ const Discount = () => {
           <Form onSubmit={putHandler}>
             <Form.Group className="mb-3">
               <Form.Label>Image</Form.Label>
-              <Form.Control type="file" onChange={(e) => uploadImage(e)} />
+              <Form.Control
+                type="file"
+                onChange={(e) => uploadImage(e)}
+              />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Name</Form.Label>
@@ -379,20 +156,6 @@ const Discount = () => {
               <Form.Control
                 type="text"
                 onChange={(e) => setHighlightsofPackage(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Itinerary day </Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setDay(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Itinerary Activity </Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setItenary(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -499,28 +262,19 @@ const Discount = () => {
       </Modal>
     );
   }
+
   return (
     <>
       <MyVerticallyCenteredModal
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
-      <EditPackageModal show={editModal} onHide={() => setEditModal(false)} />
 
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
             All Packages
           </span>
-          <Button
-            variant="outline-success"
-            onClick={() => {
-              setEdit(false);
-              setModalShow(true);
-            }}
-          >
-            Add Packages
-          </Button>
         </div>
 
         <div style={{ maxWidth: "900px", overflow: "auto", margin: "auto" }}>
@@ -543,6 +297,7 @@ const Discount = () => {
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Activity</th>
+                <th>Vendor</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -586,6 +341,7 @@ const Discount = () => {
                   <td> {i.start_date?.slice(0, 10)} </td>
                   <td> {i.end_date?.slice(0, 10)} </td>
                   <td> {i.otherActivity} </td>
+                  <td> {i.vendorName} </td>
                   <td>
                     <div style={{ display: "flex", gap: "10px" }}>
                       <i
@@ -594,12 +350,11 @@ const Discount = () => {
                         onClick={() => deleteData(i._id)}
                       ></i>
                       <i
-                        className="fa-solid fa-file-pen"
+                        class="fa-sharp fa-solid fa-edit"
                         style={{ color: "blue", cursor: "pointer" }}
                         onClick={() => {
-                          setId(i._id);
-                          setEditModal(true);
-                        }}
+                          setId(i._id)
+                          setModalShow(true)}}
                       ></i>
                     </div>
                   </td>
@@ -613,4 +368,4 @@ const Discount = () => {
   );
 };
 
-export default HOC(Discount);
+export default HOC(Product);

@@ -1,21 +1,23 @@
 /** @format */
 
-import React from "react";
-import HOC from "../layout/HOC";
+import React, { useEffect, useState } from "react";
 import { Table, Modal, Form, Button } from "react-bootstrap";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import HOC from "../../layout/HOC";
 import { toast } from "react-toastify";
 
-const Tour = () => {
+const UserKundli = () => {
   const [data, setData] = useState([]);
   const [modalShow, setModalShow] = React.useState(false);
-  const [id, setId] = useState("");
+  const [edit, setEdit] = useState(false);
+  const [ id , setId ] = useState("")
+  const vendorId = localStorage.getItem("VendorId");
+
 
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "https://oyi65hi3pd.execute-api.ap-south-1.amazonaws.com/development/populartourRouter/getAllpopular"
+        "https://oyi65hi3pd.execute-api.ap-south-1.amazonaws.com/development/populartourRouter/getAllpopulartourVendor"
       );
       setData(data.getAllpopulardestination);
     } catch (err) {
@@ -30,7 +32,7 @@ const Tour = () => {
   const deleteData = async (id) => {
     try {
       const { data } = await axios.delete(
-        `https://oyi65hi3pd.execute-api.ap-south-1.amazonaws.com/development/populartourRouter/deletepopulartour1/${id}`
+        `https://oyi65hi3pd.execute-api.ap-south-1.amazonaws.com/development/populartourRouter/deletepopulartourVendor/${id}`
       );
       console.log(data.message);
       toast.success("Vendor Deleted");
@@ -42,28 +44,41 @@ const Tour = () => {
 
   function MyVerticallyCenteredModal(props) {
     const [country, setCountry] = useState("");
+    const [touristDestination, setDestination] = useState("");
     const [city, setCity] = useState("");
-    const [touristDestination, setTouristDestination] = useState("");
 
-    const putHandler = async (e) => {
+    const postData = async (e) => {
       e.preventDefault();
       try {
-        const { data } = await axios.put(
-          `https://oyi65hi3pd.execute-api.ap-south-1.amazonaws.com/development/populartourRouter/Updatepopulartour1/${id}`,
-          {
-            country,
-            city,
-            touristDestination,
-          }
+        const { data } = await axios.post(
+          "https://oyi65hi3pd.execute-api.ap-south-1.amazonaws.com/development/populartourRouter/populartourVendor",
+          { country, touristDestination, city }
         );
         console.log(data);
-        fetchData();
+        toast.success("Tour Added");
         props.onHide();
-        alert("Updated");
-      } catch (e) {
-        console.log(e);
+        fetchData();
+      } catch (err) {
+        console.log(err);
       }
     };
+
+    const putHandler = async (e) => {
+      e.preventDefault()
+      try{
+        const { data } = await axios.put(`https://oyi65hi3pd.execute-api.ap-south-1.amazonaws.com/development/populartourRouter/UpdatepopulartourVendor/${id}` , {
+          country , 
+          touristDestination ,
+          city
+        })
+        console.log(data)
+        alert('Updated')
+        fetchData()
+        props.onHide()
+      }catch(e) { 
+        console.log(e)
+      }
+    }
 
     return (
       <Modal
@@ -74,18 +89,11 @@ const Tour = () => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Edit Tour
+            {edit ? "Edit Tour" : "Add Tour"}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={putHandler}>
-            <Form.Group className="mb-3">
-              <Form.Label>City</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setCity(e.target.value)}
-              />
-            </Form.Group>
+          <Form onSubmit={edit ? putHandler : postData}>
             <Form.Group className="mb-3">
               <Form.Label>Country</Form.Label>
               <Form.Control
@@ -94,10 +102,17 @@ const Tour = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Tour Destination</Form.Label>
+              <Form.Label>City</Form.Label>
               <Form.Control
                 type="text"
-                onChange={(e) => setTouristDestination(e.target.value)}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Destination</Form.Label>
+              <Form.Control
+                type="text"
+                onChange={(e) => setDestination(e.target.value)}
               />
             </Form.Group>
             <Button variant="outline-success" type="submit">
@@ -122,6 +137,15 @@ const Tour = () => {
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
             All Tours
           </span>
+          <Button
+            variant="outline-success"
+            onClick={() => {
+              setModalShow(true);
+              setEdit(false);
+            }}
+          >
+            Add Tour
+          </Button>
         </div>
 
         <div style={{ maxWidth: "100%", overflow: "auto" }}>
@@ -130,8 +154,7 @@ const Tour = () => {
               <tr>
                 <th> City</th>
                 <th> Country</th>
-                <th>Tour Destination</th>
-                <th>Vendor</th>
+                <th>Tour Destinatiomn</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -147,22 +170,21 @@ const Tour = () => {
                     ))}{" "}
                   </td>
                   <td>
-                    {i.vendorId?.name}
-                  </td>
-                  <td>
                     <div style={{ display: "flex", gap: "10px" }}>
                       <i
-                        className="fa-sharp fa-solid fa-trash"
+                        class="fa-sharp fa-solid fa-trash"
                         style={{ color: "red", cursor: "pointer" }}
                         onClick={() => deleteData(i._id)}
                       ></i>
 
                       <i
-                        className="fa-sharp fa-solid fa-edit"
+                        class="fa-sharp fa-solid fa-edit"
                         style={{ color: "blue", cursor: "pointer" }}
                         onClick={() => {
                           setId(i._id)
-                          setModalShow(true)}}
+                          setEdit(true);
+                          setModalShow(true);
+                        }}
                       ></i>
                     </div>
                   </td>
@@ -175,5 +197,4 @@ const Tour = () => {
     </>
   );
 };
-
-export default HOC(Tour);
+export default HOC(UserKundli);

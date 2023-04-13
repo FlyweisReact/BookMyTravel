@@ -13,7 +13,7 @@ function Specification() {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-      `https://oyi65hi3pd.execute-api.ap-south-1.amazonaws.com/development/paymentRouter/getAllpaymentByvendor/${vendorId}`
+      `https://oyi65hi3pd.execute-api.ap-south-1.amazonaws.com/development/paymentRouter/getAllpaymentByvendor/${}`
       );
       setData(data.data);
     } catch (err) {

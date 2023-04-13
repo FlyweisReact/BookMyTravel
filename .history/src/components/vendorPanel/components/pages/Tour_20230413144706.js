@@ -17,7 +17,7 @@ const Tour = () => {
       const { data } = await axios.get(
         "https://oyi65hi3pd.execute-api.ap-south-1.amazonaws.com/development/populartourRouter/getAllpopular"
       );
-      setData(data.getAllpopulardestination);
+      setData(data.getAllpopular);
     } catch (err) {
       console.log(err);
     }

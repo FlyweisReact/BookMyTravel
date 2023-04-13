@@ -138,7 +138,7 @@ const Discount = () => {
               <Form.Label>Vedio/Image</Form.Label>
               <Form.Control
                 type="file"
-                onChange={(e) => uploadImage(e)}
+                onChange={(e) => uploadImage(e.target.files[0])}
               />
             </Form.Group>
             <Form.Group className="mb-3">

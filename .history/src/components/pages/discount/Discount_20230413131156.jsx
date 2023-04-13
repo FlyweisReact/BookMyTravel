@@ -52,19 +52,19 @@ const Discount = () => {
     const [price, setPrice] = useState("");
     const [discount, setDiscount] = useState("");
     const [Type, setType] = useState("");
-    const [packageName, setPackageName] = useState("");
-    const [otherActivity, setOtherActivity] = useState("");
-    const [Highlightsofpackage, setHighlightsOfPackage] = useState("");
-    const [day, setDay] = useState("");
-    const [itenary, setIternay] = useState("");
-    const [longitude, setLongitude] = useState("");
-    const [latitude, setLatitude] = useState("");
+    const [ packageName , setPackageName ] = useState("")
+    const [ otherActivity , setOtherActivity ] = useState("")
+    const [ Highlightsofpackage , setHighlightsOfPackage ] = useState("")
+    const [ day , setDay] = useState("")
+    const [itenary , setIternay ] = useState("")
+    const [ longitude , setLongitude ] = useState("")
+    const [ latitude , setLatitude ]  = useState("")
     const [touristDestination, setDestination] = useState("");
     const [location, setLocation] = useState("");
-    const [category, setCategory] = useState("");
-    const [images, setImage] = useState("");
-    const [inclusions, setInclusion] = useState("");
-
+    const [ category , setCategory] = useState("")
+    const [ images , setImage] = useState("")
+    const [ inclusions , setInclusion ] = useState("")
+    
     const uploadImage = (e) => {
       const data = new FormData();
       data.append("file", e.target.files[0]);
@@ -85,6 +85,7 @@ const Discount = () => {
         });
     };
 
+
     const postData = async (e) => {
       e.preventDefault();
       try {
@@ -96,19 +97,19 @@ const Discount = () => {
             price,
             discount,
             Type,
-            packageName,
-            otherActivity,
-            Highlightsofpackage,
-            longitude,
+            packageName , 
+            otherActivity , 
+            Highlightsofpackage , 
+            longitude , 
             latitude,
             day,
             itenary,
-            category,
-            images,
+            category , 
+            images , 
             inclusions,
             touristDestination,
             location,
-            vendorId,
+            vendorId
           }
         );
         console.log(data);
@@ -120,6 +121,7 @@ const Discount = () => {
       }
     };
 
+ 
     return (
       <Modal
         {...props}
@@ -134,129 +136,106 @@ const Discount = () => {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={postData}>
-            <Form.Group className="mb-3">
-              <Form.Label>Vedio/Image</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={(e) => uploadImage(e)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setPackageName(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setCategory(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Highlights</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setHighlightsOfPackage(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Itinerary day  </Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setDay(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Itinerary   </Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setIternay(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Inclusion</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setInclusion(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Latitude</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setLatitude(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Longitude</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setLongitude(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Start Date</Form.Label>
-              <Form.Control
-                type="date"
-                onChange={(e) => setStartDate(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>End Date</Form.Label>
-              <Form.Control
-                type="date"
-                onChange={(e) => setEndDate(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Price</Form.Label>
-              <Form.Control
-                type="number"
-                onChange={(e) => setPrice(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Discount</Form.Label>
-              <Form.Control
-                type="number"
-                min={1}
-                onChange={(e) => setDiscount(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Type</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setType(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Activity</Form.Label>
-              <FloatingLabel controlId="floatingTextarea" className="mb-3">
-                <Form.Control
-                  as="textarea"
-                  placeholder="Leave a comment here"
-                  onChange={(e) => setOtherActivity(e.target.value)}
-                />
-              </FloatingLabel>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Tourist Destination</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setDestination(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Location</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => setLocation(e.target.value)}
-              />
-            </Form.Group>
+              <>
+                <Form.Group className="mb-3">
+                  <Form.Label>Vedio/Image</Form.Label>
+                  <Form.Control type="file" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control type="text" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Category</Form.Label>
+                  <Form.Control type="text" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Highlights</Form.Label>
+                  <Form.Control type="text" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Itinerary day wise </Form.Label>
+                  <Form.Control type="text" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Inclusion</Form.Label>
+                  <Form.Control type="text" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Google Location</Form.Label>
+                  <Form.Control type="text" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>Start Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    onChange={(e) => setStartDate(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>End Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    onChange={(e) => setEndDate(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>Price</Form.Label>
+                  <Form.Control
+                    type="number"
+                    onChange={(e) => setPrice(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>Discount</Form.Label>
+                  <Form.Control
+                    type="number"
+                    min={1}
+                    onChange={(e) => setDiscount(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>Type</Form.Label>
+                  <Form.Control
+                    type="text"
+                    onChange={(e) => setType(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>Activity Day</Form.Label>
+                  <FloatingLabel controlId="floatingTextarea" className="mb-3">
+                    <Form.Control
+                      as="textarea"
+                      placeholder="Leave a comment here"
+                      onChange={(e) => setDay(e.target.value)}
+                    />
+                  </FloatingLabel>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>Activity Iternary</Form.Label>
+                  <FloatingLabel controlId="floatingTextarea" className="mb-3">
+                    <Form.Control
+                      as="textarea"
+                      placeholder="Leave a comment here"
+                      onChange={(e) => setIternay(e.target.value)}
+                    />
+                  </FloatingLabel>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>Tourist Destination</Form.Label>
+                  <Form.Control
+                    type="text"
+                    onChange={(e) => setDestination(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>Location</Form.Label>
+                  <Form.Control
+                    type="text"
+                    onChange={(e) => setLocation(e.target.value)}
+                  />
+                </Form.Group>
+              </>
             <Button variant="primary" type="submit">
               Submit
             </Button>
@@ -592,6 +571,14 @@ const Discount = () => {
                         class="fa-sharp fa-solid fa-trash"
                         style={{ color: "red", cursor: "pointer" }}
                         onClick={() => deleteData(i._id)}
+                      ></i>
+                      <i
+                        class="fa-sharp fa-solid fa-edit"
+                        style={{ color: "blue", cursor: "pointer" }}
+                        onClick={() => {
+                          setId(i._id);
+                          setModalShow(true);
+                        }}
                       ></i>
                       <i
                         className="fa-solid fa-file-pen"
